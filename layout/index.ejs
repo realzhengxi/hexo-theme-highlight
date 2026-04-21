@@ -1,0 +1,70 @@
+<% 
+var posts = page.posts.toArray();
+if (posts.length === 0) {
+  return;
+}
+
+function getExcerpt(post, maxLen) {
+  maxLen = maxLen || 120;
+  // 优先使用 front-matter 中的 description
+  if (post.description) {
+    return post.description.substring(0, maxLen);
+  }
+  // 使用 excerpt（自动截取的正文前段）
+  if (post.excerpt) {
+    var text = post.excerpt.replace(/<[^>]+>/g, '').replace(/\n/g, ' ').trim();
+    return text.length > maxLen ? text.substring(0, maxLen) : text;
+  }
+  // 兜底：从 content 中提取纯文本前 N 字符
+  if (post.content) {
+    var contentText = post.content.replace(/<[^>]+>/g, '').replace(/\n/g, ' ').trim();
+    return contentText.length > maxLen ? contentText.substring(0, maxLen) : contentText;
+  }
+  return '';
+}
+%>
+
+<div class="post-list">
+<% posts.forEach(function(post) { %>
+  <article class="post-item">
+    <div class="post-item-inner">
+      <% if (post.categories && post.categories.length > 0) { %>
+        <div class="post-category">
+          <a class="category-link" href="<%= url_for(post.categories.first().path) %>">
+            <%= post.categories.first().name.toUpperCase() %>
+          </a>
+        </div>
+      <% } else if (page.prev) { %>
+        <!-- 分页时无分类显示占位 -->
+        <div class="post-category">
+          <span class="category-link">DEFAULT</span>
+        </div>
+      <% } %>
+
+      <h2 class="post-title">
+        <a href="<%= url_for(post.path) %>"><%= post.title %></a>
+      </h2>
+
+      <% var excerpt = getExcerpt(post, theme.index.excerpt_length || 120); 
+         if (excerpt) { %>
+        <p class="post-excerpt"><%= excerpt %></p>
+      <% } %>
+
+      <time class="post-date" datetime="<%= date(post.date, 'YYYY-MM-DD') %>">
+        <%= date(post.date, 'YYYY-MM-DD') %>
+      </time>
+    </div>
+  </article>
+<% }); %>
+</div>
+
+<% if (page.total > 1) { %>
+<nav class="pagination">
+  <% if (page.prev) { %>
+    <a class="pagination-prev" href="<%= url_for(page.prev_path) %>">← newer</a>
+  <% } %>
+  <% if (page.next) { %>
+    <a class="pagination-next" href="<%= url_for(page.next_path) %>">older →</a>
+  <% } %>
+</nav>
+<% } %>

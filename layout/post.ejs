@@ -1,0 +1,55 @@
+<article class="post-article">
+  <header class="post-header">
+    <% if (page.categories && page.categories.length > 0) { %>
+      <div class="post-category">
+        <a class="category-link" href="<%= url_for(page.categories.first().path) %>">
+          <%= page.categories.first().name.toUpperCase() %>
+        </a>
+      </div>
+    <% } %>
+    
+    <h1 class="post-article-title"><%= page.title %></h1>
+    
+    <div class="post-meta">
+      <time datetime="<%= date(page.date, 'YYYY-MM-DD') %>">
+        <%= date(page.date, 'YYYY-MM-DD') %>
+      </time>
+      <% if (page.comments !== false && config.disqus_shortname) { %>
+        <a href="#comments">Comments</a>
+      <% } %>
+    </div>
+  </header>
+
+  <div class="post-content">
+    <%- page.content %>
+  </div>
+
+  <% if (theme.post.show_copyright !== false) { %>
+  <footer class="post-footer">
+    <% if (config.author) { %>
+    <p class="copyright-notice">© <%= config.author %></p>
+    <% } %>
+  </footer>
+  <% } %>
+
+  <% if (theme.post.show_prev_next !== false) { %>
+  <nav class="post-nav">
+    <% if (page.prev) { %>
+      <a class="post-nav-prev" href="<%= url_for(page.prev.path) %>">
+        ← <%= page.prev.title %>
+      </a>
+    <% } %>
+    <% if (page.next) { %>
+      <a class="post-nav-next" href="<%= url_for(page.next.path) %>">
+        <%= page.next.title %>
+      </a>
+    <% } %>
+  </nav>
+  <% } %>
+
+  <% if (page.comments !== false && config.disqus_shortname) { %>
+  <section id="comments" class="comments-section">
+    <div id="disqus_thread"></div>
+  </section>
+  <% } %>
+</article>

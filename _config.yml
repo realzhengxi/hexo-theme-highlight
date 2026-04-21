@@ -1,0 +1,71 @@
+# Highlight Theme Configuration
+# 极简风格博客主题
+
+# CDN 加速
+cdn:
+  enable: true
+  # 部署后填入你的 CDN 基础 URL
+  # 例如：https://cdn.example.com 或 https://your-name.github.io
+  # 本地开发留空即可（使用相对路径）
+  url: ''
+  # 第三方库 CDN 配置
+  vendors:
+    highlight_js: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0'
+    highlight_css: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/atom-one-dark.min.css'
+    mermaid: 'https://cdn.jsdelivr.net/npm/mermaid@11.6.5'
+
+# 站点信息
+site_title: ''
+site_subtitle: ''
+
+# 风格配置
+style:
+  # 主色调
+  accent_color: '#b74e4e'
+  # 背景色
+  background_color: '#f5f3ef'
+  # 文字颜色
+  text_color: '#2c2c2c'
+  text_secondary: '#888'
+  # 边框颜色
+  border_color: '#e0ddd8'
+  
+# 字体
+fonts:
+  title_font: '-apple-system, "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif'
+  body_font: '-apple-system, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei UI", sans-serif'
+
+# 布局
+layout:
+  max_width: '720px'
+  post_list_style: 'simple'  # simple = 参考图片的列表风格
+  
+# 首页
+index:
+  show_excerpt: true
+  excerpt_length: 120
+
+# 文章页
+post:
+  show_toc: false
+  show_copyright: true
+  show_prev_next: true
+
+# 代码高亮
+highlight:
+  # 主题: 'one-dark' (默认) | 'github' | 'solarized-dark' | 'solarized-light' | 'atom'
+  theme: one-dark
+  # 是否显示行号（需 hexo 配置 highlight.line_number: true）
+  line_number: true
+  # 是否显示代码块复制按钮
+  copy_button: true
+  # 是否显示代码语言标签（标题栏）
+  lang_label: true
+  # 高亮库 CDN 地址（默认 highlight.js 11.10.0）
+  cdn_url: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js'
+  
+# 页脚
+footer:
+  since_year: 2026
+  icp: ''
+  custom_text: ''
