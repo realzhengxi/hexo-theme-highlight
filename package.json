@@ -1,1 +1,1 @@
-{"name": "hexo-theme-highlight", "version": "1.0.0", "description": "极简风格的 Hexo 博客主题 - Highlight Theme", "main": "layout/layout.ejs", "scripts": {}, "repository": {"type": "git", "url": ""}, "keywords": ["hexo", "theme", "minimal", "blog"], "author": "", "license": "MIT"}
+{"name": "hexo-theme-highlight", "version": "1.0.0", "description": "极简风格的 Hexo 博客主题 - Highlight Theme", "main": "layout/layout.ejs", "scripts": {}, "repository": {"type": "git", "url": ""}, "keywords": ["hexo", "theme", "minimal", "blog"], "author": "", "license": "GPL-3.0"}
