@@ -4,11 +4,11 @@
 
 **Highlight** 是一款极简风格的 Hexo 主题，灵感来自 [失眠海峡](https://blog.imalan.cn)。它摒弃一切冗余装饰，用克制的排版和大量留白，让你的内容成为唯一的主角。
 
-![预览截图](screenshot.png)
+预览链接：https://blog.realzhengxi.com
 
 ---
 
-## ✨ 特性 / Features
+## 特性 / Features
 
 - **极简设计** — 米白底色 + 衬线标题 + 红棕强调色，克制而优雅
 - **文章列表** — 分类标签、标题、摘要、日期四要素，清晰有序
@@ -19,19 +19,15 @@
 - **SEO 友好** — 语义化 HTML + meta 标签
 - **零依赖** — 纯 CSS + 原生 JS，无需任何前端框架
 
-## 📸 截图预览 / Screenshots
 
-| 首页文章列表 | 文章详情 | 搜索弹窗 |
-|:---:|:---:|:---:|
-| ![首页](screenshots/home.png) | ![文章](screenshots/post.png) | ![搜索](screenshots/search.png) |
 
-## 🚀 快速开始 / Quick Start
+##  快速开始 / Quick Start
 
 ### 安装 / Installation
 
 ```bash
 cd your-hexo-blog
-git clone https://github.com/your-repo/hexo-theme-highlight themes/highlight
+git clone https://github.com/realzhengxi/hexo-theme-highlight themes/highlight
 ```
 
 ### 启用 / Enable Theme
@@ -101,7 +97,7 @@ style:
   shadow: 'default'
 ```
 
-## 📝 使用指南 / Usage Guide
+## 使用指南 / Usage Guide
 
 ### 文章摘要 / Excerpt
 
@@ -181,7 +177,7 @@ layout: page
 这里写你的内容...
 ```
 
-## 🎨 自定义样式 / Customization
+## 自定义样式 / Customization
 
 ### 调整颜色
 
@@ -209,7 +205,7 @@ layout: page
 }
 ```
 
-## 📂 目录结构 / File Structure
+## 目录结构 / File Structure
 
 ```
 highlight/
@@ -233,7 +229,7 @@ highlight/
         └── search.js        # 搜索脚本（内嵌于 layout.ejs）
 ```
 
-## 🔧 兼容性 / Browser Support
+##  兼容性 / Browser Support
 
 | 浏览器 | 最低版本 |
 |--------|---------|
@@ -246,7 +242,11 @@ highlight/
 
 ## 📄 许可证 / License
 
-[MIT License](LICENSE)
+[MIT License](LICENSE) © 2026 ZhengXi
+
+Highlight 主题本身采用 MIT 协议开源。主题通过 CDN 引用的第三方库遵循其各自协议：
+- [highlight.js](https://github.com/highlightjs/highlight.js) — BSD-3-Clause
+- [mermaid](https://github.com/mermaid-js/mermaid) — MIT
 
 ## 🙏 致谢 / Credits
 
