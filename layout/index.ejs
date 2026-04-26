@@ -1,0 +1,92 @@
+<% 
+var posts = page.posts.toArray();
+if (posts.length === 0) {
+  return;
+}
+
+function getExcerpt(post, maxLen) {
+  maxLen = maxLen || 120;
+  if (post.description) {
+    return post.description.substring(0, maxLen);
+  }
+  if (post.excerpt) {
+    var text = post.excerpt.replace(/<[^>]+>/g, '').replace(/\n/g, ' ').trim();
+    return text.length > maxLen ? text.substring(0, maxLen) : text;
+  }
+  if (post.content) {
+    var contentText = post.content.replace(/<[^>]+>/g, '').replace(/\n/g, ' ').trim();
+    return contentText.length > maxLen ? contentText.substring(0, maxLen) : contentText;
+  }
+  return '';
+}
+
+function getCoverImage(post) {
+  // 优先使用 front-matter 中的 cover / photos / thumbnail
+  if (post.cover) return post.cover;
+  if (post.photos && post.photos.length > 0) return post.photos[0];
+  if (post.thumbnail) return post.thumbnail;
+  // 兼配：从 content 中提取第一张图片
+  var imgMatch = (post.content || '').match(/<img\s[^>]*src=["']([^"']+)["']/);
+  if (imgMatch) return imgMatch[1];
+  return null;
+}
+%>
+
+<div class="post-list">
+<% posts.forEach(function(post) { %>
+  <% var coverImg = getCoverImage(post); %>
+  <article class="post-item<%= coverImg ? ' has-cover' : '' %>">
+    <a class="post-item-link" href="<%= url_for(post.path) %>">
+      <% if (coverImg) { %>
+        <div class="post-cover">
+          <img src="<%= url_for(coverImg) %>" alt="<%= post.title %>" loading="lazy" />
+          <div class="post-cover-overlay">
+            <h2 class="post-title"><%= post.title %></h2>
+          </div>
+        </div>
+      <% } else { %>
+        <h2 class="post-title"><%= post.title %></h2>
+      <% } %>
+    </a>
+
+    <div class="post-item-inner">
+      <% if (post.categories && post.categories.length > 0) { %>
+        <div class="post-category">
+          <a class="category-link" href="<%= url_for(post.categories.first().path) %>">
+            <%= post.categories.first().name.toUpperCase() %>
+          </a>
+        </div>
+      <% } else if (page.prev) { %>
+        <div class="post-category">
+          <span class="category-link">DEFAULT</span>
+        </div>
+      <% } %>
+
+      <% if (!coverImg) {
+           var excerpt = getExcerpt(post, theme.index.excerpt_length || 120);
+           if (excerpt) { %>
+        <p class="post-excerpt"><%= excerpt %></p>
+      <% } } else {
+           var excerpt = getExcerpt(post, theme.index.excerpt_length || 120);
+           if (excerpt) { %>
+        <p class="post-excerpt"><%= excerpt %></p>
+      <% } } %>
+
+      <time class="post-date" datetime="<%= date(post.date, 'YYYY-MM-DD') %>">
+        <%= date(post.date, 'YYYY-MM-DD') %>
+      </time>
+    </div>
+  </article>
+<% }); %>
+</div>
+
+<% if (page.total > 1) { %>
+<nav class="pagination">
+  <% if (page.prev) { %>
+    <a class="pagination-prev" href="<%= url_for(page.prev_path) %>">← newer</a>
+  <% } %>
+  <% if (page.next) { %>
+    <a class="pagination-next" href="<%= url_for(page.next_path) %>">older →</a>
+  <% } %>
+</nav>
+<% } %>

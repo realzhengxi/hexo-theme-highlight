@@ -1,0 +1,32 @@
+<section class="archives-page">
+  <h2 class="page-title">Archives</h2>
+
+  <% var posts = site.posts.sort('date', -1); %>
+  <% var currentYear = null; %>
+  <% var yearCount = 0; %>
+
+  <div class="archives-list">
+    <% posts.forEach(function(post) { %>
+      <% var postYear = date(post.date, 'YYYY'); %>
+      <% if (postYear !== currentYear) { %>
+        <% if (currentYear !== null) { %>
+          </div>
+        <% } %>
+        <% currentYear = postYear; %>
+        <div class="archive-year">
+          <h3 class="year-title"><%= postYear %></h3>
+          <div class="year-posts">
+      <% } %>
+
+      <a href="<%= url_for(post.path) %>" class="archive-post-item">
+        <time class="archive-date"><%= date(post.date, 'MM-DD') %></time>
+        <span class="archive-title"><%= post.title %></span>
+        <% if (post.categories && post.categories.length > 0) { %>
+          <span class="archive-category"><%= post.categories.first().name %></span>
+        <% } %>
+      </a>
+    <% }); %>
+      </div><!-- /year-posts -->
+    </div><!-- /archive-year -->
+  </div>
+</section>

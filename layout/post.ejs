@@ -1,0 +1,72 @@
+<article class="post-article">
+  <header class="post-header">
+    <% if (page.categories && page.categories.length > 0) { %>
+      <div class="post-category">
+        <a class="category-link" href="<%= url_for(page.categories.first().path) %>">
+          <%= page.categories.first().name.toUpperCase() %>
+        </a>
+      </div>
+    <% } %>
+    
+    <h1 class="post-article-title"><%= page.title %></h1>
+    
+    <div class="post-meta">
+      <time datetime="<%= date(page.date, 'YYYY-MM-DD') %>">
+        <%= date(page.date, 'YYYY-MM-DD') %>
+      </time>
+      <% if (page.comments !== false && config.disqus_shortname) { %>
+        <a href="#comments">Comments</a>
+      <% } %>
+    </div>
+  </header>
+
+  <div class="post-content">
+    <%- page.content %>
+  </div>
+
+  <% if (theme.post.show_copyright !== false) { %>
+  <footer class="post-footer">
+    <% if (config.author) { %>
+    <p class="copyright-notice">© <%= config.author %></p>
+    <% } %>
+  </footer>
+  <% } %>
+
+  <% if (theme.post.show_prev_next !== false) { %>
+  <nav class="post-nav">
+    <% if (page.prev) { %>
+      <a class="post-nav-item post-nav-prev" href="<%= url_for(page.prev.path) %>">
+        <span class="post-nav-label">PREV</span>
+        <span class="post-nav-title"><%= page.prev.title %></span>
+      </a>
+    <% } %>
+    <% if (page.next) { %>
+      <a class="post-nav-item post-nav-next" href="<%= url_for(page.next.path) %>">
+        <span class="post-nav-label">NEXT</span>
+        <span class="post-nav-title"><%= page.next.title %></span>
+      </a>
+    <% } %>
+  </nav>
+  <% } %>
+
+  <% if (page.comments !== false && theme.giscus && theme.giscus.enable) { %>
+  <section id="comments" class="comments-section">
+    <script src="https://giscus.app/client.js"
+      data-repo="<%= theme.giscus.repo %>"
+      data-repo-id="<%= theme.giscus.repo_id %>"
+      data-category="<%= theme.giscus.category %>"
+      data-category-id="<%= theme.giscus.category_id %>"
+      data-mapping="<%= theme.giscus.mapping || 'title' %>"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="<%= theme.giscus.theme || 'light' %>"
+      data-lang="<%= theme.giscus.lang || 'zh-CN' %>"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </section>
+  <% } %>
+</article>

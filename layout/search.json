@@ -1,0 +1,10 @@
+<%# Search JSON - 供前端搜索使用 %>
+[
+<% site.posts.sort('-date').forEach(function(post, i) { %>
+{
+  "title": "<%= post.title.replace(/"/g, '\\"') %>",
+  "url": "<%= url_for(post.path) %>",
+  "text": "<%= strip_html(post.content).replace(/"/g, '\\"').replace(/\s+/g, ' ').trim().substring(0, 300) %>"
+}<%- (i < site.posts.length - 1 ? ',' : '') %>
+<% }) %>
+]

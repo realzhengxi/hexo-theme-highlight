@@ -1,0 +1,19 @@
+<%# Categories Page (body only - header/footer in layout.ejs) %>
+<section class="archives-page">
+  <h2 class="page-title">Categories</h2>
+
+  <% var cats = site.categories.find({}); %>
+
+  <div class="categories-list">
+    <% if (cats && cats.length > 0) { %>
+      <% cats.toArray().sort(function(a, b) { return a.name.localeCompare(b.name); }).forEach(function(cat) { %>
+        <a class="archive-post-item" href="<%= url_for(cat.path) %>">
+          <span class="category-name"><%= cat.name %></span>
+          <span class="category-count"><%= cat.posts.length %></span>
+        </a>
+      <% }) %>
+    <% } else { %>
+      <p class="search-empty" style="text-align:center;padding:3rem 0;">No categories yet.</p>
+    <% } %>
+  </div>
+</section>

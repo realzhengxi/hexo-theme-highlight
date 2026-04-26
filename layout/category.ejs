@@ -1,0 +1,19 @@
+<%# Category Page - 单个分类下的文章列表 %>
+<section class="archives-page">
+  <h2 class="page-title">Category: <%= page.category %></h2>
+
+  <% var posts = page.posts.sort('date', -1); %>
+
+  <div class="archives-list">
+    <% if (posts && posts.length > 0) { %>
+      <% posts.forEach(function(post) { %>
+      <a href="<%= url_for(post.path) %>" class="archive-post-item">
+        <time class="archive-date"><%= date(post.date, 'MM-DD') %></time>
+        <span class="archive-title"><%= post.title %></span>
+      </a>
+      <% }) %>
+    <% } else { %>
+      <p class="search-empty" style="text-align:center;padding:3rem 0;">No posts in this category yet.</p>
+    <% } %>
+  </div>
+</section>
